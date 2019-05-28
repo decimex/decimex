@@ -1,3 +1,4 @@
+from services.ProjectsFinder import ProjectsFinder
 from services.IssuesFetcher import IssuesFetcher
 from services.IssuesParser import IssuesParser
 
