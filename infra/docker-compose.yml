@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    container_name: postgres
+    image: postgres:latest
+    restart: always
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+        - POSTGRES_USER:'admin'
+        - POSTGRES_PASSWORD:'Aa123456'
+        - POSTGRES_DB:'issues'
+    network_mode: host
