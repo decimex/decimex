@@ -19,4 +19,5 @@ class ProjectsFinder():
         sleep(1)
 
     def search_python_repos(self):
-         python_repos = g.search_repositories(query='language:python')
+        g = Github(GITHUB_ACCESS_TOKEN)
+        python_repos = g.search_repositories(query='language:python')
