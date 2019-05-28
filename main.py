@@ -3,8 +3,12 @@ from services.IssuesParser import IssuesParser
 
 
 def main():
-    parser = IssuesParser()
-    issues = IssuesFetcher().get_issues_from_github("zzzeek", 'sqlalchemy')
+    projects_finder = ProjectsFinder()
+    issues_parser = IssuesParser()
+    issues_fetcher = IssuesFetcher()
+
+    issues_fetcher.get_issues_from_github("zzzeek", 'sqlalchemy')
+
     for issue in issues:
         parser.parse_issue(issue)
 
