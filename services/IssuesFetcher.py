@@ -12,6 +12,11 @@ class IssuesFetcher:
             if 'bug' in label.name.lower():
                 bug_label = label
                 break
+
+        # TODO: filter by time
         issues = repo.get_issues(state=status, labels=[bug_label])
+        issues = list(iter(issues))
+
         for issue in issues:
             print(issue)
+        return issues
