@@ -1,5 +1,7 @@
-from ..consts import GITHUB_ACCESS_TOKEN
 from github import Github
+
+from consts import GITHUB_API_KEY
+
 
 class ProjectsFinder():
     def __init__(self):
@@ -19,5 +21,6 @@ class ProjectsFinder():
         sleep(1)
 
     def search_python_repos(self):
-        g = Github(GITHUB_ACCESS_TOKEN)
+        g = Github(GITHUB_API_KEY)
         python_repos = g.search_repositories(query='language:python')
+        return python_repos
