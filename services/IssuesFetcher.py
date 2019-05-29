@@ -1,12 +1,8 @@
 from github import Github
 
-from consts import GITHUB_API_KEY
-
 
 class IssuesFetcher:
-    def get_issues_from_github(self, organization, project, status="closed"):
-        github = Github(GITHUB_API_KEY)
-        repo = github.get_repo(organization + '/' + project)
+    def get_issues_from_github(self, repo, status="closed"):
         bug_label = None
         for label in repo.get_labels():
             if 'bug' in label.name.lower():
