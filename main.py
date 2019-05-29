@@ -8,7 +8,10 @@ def main():
     issues_parser = IssuesParser()
     issues_fetcher = IssuesFetcher()
 
-    issues_fetcher.get_issues_from_github("zzzeek", 'sqlalchemy')
+    python_repos = projects_finder.search_python_repos()
+
+    for repo in python_repos:
+        issues_fetcher.get_issues_from_github(repo)
 
     for issue in issues:
         parser.parse_issue(issue)
