@@ -1,9 +1,11 @@
+from time import sleep
+
 from github import Github
 
 from consts import GITHUB_API_KEY
 
 
-class ProjectsFinder():
+class ProjectsFinder:
     def __init__(self):
         self.should_run = False
 
@@ -17,7 +19,7 @@ class ProjectsFinder():
         self.should_run = False
 
     def _run(self):
-        self.get_random_repos()
+        self.search_python_repos()
         sleep(1)
 
     def search_python_repos(self):
