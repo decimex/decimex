@@ -10,7 +10,10 @@ class IssuesFetcher:
                 break
 
         # TODO: filter by time
-        issues = repo.get_issues(state=status, labels=[bug_label])
+        if bug_label is None:
+            issues = repo.get_issues(state=status)
+        else:
+            issues = repo.get_issues(state=status, labels=[bug_label])
         issues = list(iter(issues))
 
         for issue in issues:
