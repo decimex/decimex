@@ -1,13 +1,18 @@
 class IssuesParser:
     def parse_issue(self, issue):
-        result = []
+        result = {}
+        file_changes = []
         if not issue.pull_request:
             return
         pr = issue.as_pull_request()
         files = pr.get_files()
         for file in files:
-            result.append(self.process_pr_file(file))
-        return result
+            file_changes.append(self.process_pr_file(file))
+        result['creation_time'] = issue.create_at
+        result['close_time'] = issue.closed_at
+        result['link'] = issue.url
+        result['issue_number'] = issue.number
+        return file_changes
 
     @staticmethod
     def process_pr_file(pr_file):
