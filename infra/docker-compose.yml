@@ -19,3 +19,4 @@ services:
     image: decimex:latest
     restart: always
     network_mode: host
+    build: ../
