@@ -8,7 +8,7 @@ class IssuesParser:
         files = pr.get_files()
         for file in files:
             file_changes.append(self.process_pr_file(file))
-        result['creation_time'] = issue.create_at
+        result['creation_time'] = issue.created_at
         result['close_time'] = issue.closed_at
         result['link'] = issue.url
         result['issue_number'] = issue.number
