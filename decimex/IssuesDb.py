@@ -56,6 +56,25 @@ class IssuesDb():
         query = session.query(Issue).filter(Issue.id == id)
         return query.delete()
 
+    def add_issue_file_change(self, session, issue_number, filename, good_code, bad_code):
+        issue_file_change = IssueFileChange(issue_number=issue_number,
+                                            filename=filename,
+                                            good_code=good_code,
+                                            bad_code=bad_code)
+        session.add(issue_file_change)
+
+    def get_all_issue_file_changes(self, session):
+        query = session.query(IssueFileChange).all()
+        return query
+
+    def get_first_issue_file_change(self, session):
+        query = session.query(IssueFileChange).first()
+        return query
+
+    def delete_issue_file_change(self, session, id):
+        query = session.query(IssueFileChange).filter(IssueFileChange.id == id)
+        return query.delete()
+
     def commit_session(self, session):
         session.commit()
 
@@ -86,3 +105,14 @@ class Issue(IssuesDb.base):
     creation_time = Column(DateTime(timezone=True))
     close_time = Column(DateTime(timezone=True))
     labels = Column(String)
+
+
+class IssueFileChange(IssuesDb.base):
+    __tablename__ = 'issue_file_changes'
+
+    id = Column(Integer, primary_key=True, unique=True, nullable=False)
+    issue_number = Column(Integer)
+    filename = Column(String)
+    good_code = Column(String)
+    bad_code = Column(String)
+    insertion_time = Column(DateTime(timezone=True), server_default=func.now())
