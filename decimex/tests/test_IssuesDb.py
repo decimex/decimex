@@ -43,4 +43,3 @@ def test_sanity():
         db.commit_session(session)
         print(db.get_all_issue_file_changes(session))
 
-test_sanity()
