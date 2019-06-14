@@ -5,6 +5,7 @@ services:
     container_name: postgres
     image: postgres:latest
     restart: always
+    network_mode: host
     ports:
       - 5432:5432
     environment:
@@ -19,3 +20,5 @@ services:
     restart: always
     network_mode: host
     build: ../
+    depends_on:
+      - postgres

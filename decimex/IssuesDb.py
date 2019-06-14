@@ -1,7 +1,7 @@
-from sqlalchemy import create_engine, Integer
+from sqlalchemy import create_engine, Integer, ForeignKey
 from sqlalchemy import Column, String, Boolean, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.sql import func
 
 
@@ -34,8 +34,8 @@ class IssuesDb():
     def create_defined_tables(self):
         self.base.metadata.create_all(self.db)
 
-    def add_issue(self, session, project, issue_number, link, status, creation_time, close_time, labels):
-        issue = Issue(project=project,
+    def add_issue(self, session, repository, issue_number, link, status, creation_time, close_time, labels):
+        issue = Issue(repository=repository,
                       issue_number=issue_number,
                       link=link,
                       status=status,
@@ -97,7 +97,7 @@ class Issue(IssuesDb.base):
     __tablename__ = 'issues'
 
     id = Column(Integer, primary_key=True, unique=True, nullable=False)
-    project = Column(String)
+    repository = Column(String)
     issue_number = Column(Integer)
     link = Column(String)
     status = Column(String)
@@ -111,8 +111,10 @@ class IssueFileChange(IssuesDb.base):
     __tablename__ = 'issue_file_changes'
 
     id = Column(Integer, primary_key=True, unique=True, nullable=False)
-    issue_number = Column(Integer)
+    issue_id = Column(Integer, ForeignKey(Issue.id))
     filename = Column(String)
     good_code = Column(String)
     bad_code = Column(String)
     insertion_time = Column(DateTime(timezone=True), server_default=func.now())
+
+    issue = relationship(Issue, backref="file_changes")
