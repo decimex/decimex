@@ -6,6 +6,8 @@ COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
 RUN mkdir ./services
+RUN mkdir ./decimex
+COPY ./decimex ./decimex
 COPY ./services ./services
 COPY ./consts.py .
 COPY ./main.py .
