@@ -13,7 +13,7 @@ def test_sanity():
     db.initialize()
     db.create_defined_tables()
 
-    project = "sensu"
+    repository = "sensu"
     issue_number = 14
     link = "https://github.com/sensu/sensu/baba"
     status = "closed"
@@ -25,7 +25,7 @@ def test_sanity():
     bad_code = "import kiki"
 
     with db.get_session() as session:
-        db.add_issue(session, project, issue_number, link, status, creation_time, close_time, labels)
+        db.add_issue(session, repository, issue_number, link, status, creation_time, close_time, labels)
         db.commit_session(session)
         print(db.get_all_issues(session))
 
