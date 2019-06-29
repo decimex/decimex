@@ -43,7 +43,7 @@ class IssuesParser:
                 db_file_change.issue_id = db_issue.id
                 db_file_change.filename = file_change['name']
                 db_file_change.good_code = file_change['good_code']
-                db_file_change.bad_code = file_change['bad_vode']
+                db_file_change.bad_code = file_change['bad_code']
                 session.add(db_file_change)
             session.commit()
         return db_issue
