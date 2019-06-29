@@ -14,8 +14,12 @@ class IssuesFetcher:
             issues = repo.get_issues(state=status)
         else:
             issues = repo.get_issues(state=status, labels=[bug_label])
-        issues = list(iter(issues))
 
-        for issue in issues:
-            print(issue)
-        return issues
+        resolved_issues = []
+        for i in range(10):
+            try:
+                resolved_issues.append(issues[i])
+            except IndexError:
+                pass
+
+        return resolved_issues
